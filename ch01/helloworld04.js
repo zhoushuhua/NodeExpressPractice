@@ -18,6 +18,7 @@ function serverStatic(res, path, contentType, responseCode) {
 
 http.createServer(function(req, res) {
 	var path = req.url.replace(/\/?(?:\?.*)?$/, '').toLowerCase();
+	console.log("createServer path:" + path);
 	switch(path){
 		case "":
 			serverStatic(res, "/public/home.html", "text/html");
