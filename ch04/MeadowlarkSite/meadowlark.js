@@ -1,7 +1,14 @@
 var express = require("express"),
-	exp_had = require("express3-handlebars"),
-	fortune = require("./lib/fortune.js");
+	exp_had = require("express3-handlebars");
 	
+var fortunes = [
+	"Conquer your fears or they will conqur you.",
+	"Rivers need springs.",
+	"Do not fear what you don't know.",
+	"You will have a pleasant surprise.",
+	"Whenever possible, keep it simple."
+];
+
 var app = express();
 var handlebars = exp_had.create({defaultLayout : "main"});
 app.engine("handlebars", handlebars.engine);
@@ -22,7 +29,8 @@ app.get("/", function(req, res) {
 app.get("/about", function(req, res) {
 //	res.type("text/plain");
 //	res.send("About Meadowlark Travel");
-	res.render("about", {fortune: fortune.getFortune()});
+	var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+	res.render("about", {fortune: randomFortune});
 });
 
 // 定制404页面
